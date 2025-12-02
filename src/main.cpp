@@ -442,6 +442,21 @@ void autonomous() {
     chassis.setPose(relocalize("NW", chassis.getPose().theta));
 
     //move to middle goal
+    pros::delay(10);
+    chassis.turnToHeading(-88, 1000, {.maxSpeed = 90});
+    chassis.moveToPoint(-19.2, 24, 1300, {.forwards = false, .maxSpeed = 70});
+    chassis.turnToHeading(-45, 600, {.maxSpeed = 80});
+    chassis.waitUntilDone();
+    matchloader.set_value(true);
+    chassis.tank(-70, -70);
+    outtake();
+    pros::delay(100);
+    stopIntake();
+    pros::delay(500);
+    scoreMiddleGoal();
+    chassis.tank(-6, -6);
+    pros::delay(2000);
+    
 }
 
 /**

@@ -183,7 +183,7 @@ void moveDistanceWFrontDist(double inches, int timeout, double maxSpeed) {
     while (pros::millis() - startTime < static_cast<uint32_t>(timeout)) {
         double cur = frontSens.get()/25.4;
 
-        error = inches - cur;
+        error = start - cur;
 
         // small-error timeout
         if (std::fabs(error) < tolerance) {
