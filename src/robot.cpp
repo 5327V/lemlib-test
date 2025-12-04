@@ -1,4 +1,7 @@
 #include "robot.h"
+#include "kinematics.hpp"
+#include "trajectoryGenerator.hpp"
+#include "path.hpp"
 
 #define LATERAL_KD 1.5
 #define MOVE_DISTANCE_P 3.8
@@ -7,7 +10,7 @@
 #define LATERAL_SMALL_ERROR_TIMEOUT 300
 #define KV 2.4
 #define KMAX 3.5
-#define ZETA 0.7
+#define ZETA 1
 #define BETA 0.02
 #define TRACKWIDTH 13.6
 #define FIELD_X_MAX 144.0
@@ -36,9 +39,9 @@ lemlib::ControllerSettings linearController(10, // proportional gain (kP)
                                             35, // derivative gain (kD)
                                             3, // anti windup
                                             1, // small error range, in inches
-                                            100, // small error range timeout, in milliseconds
+                                            50, // small error range timeout, in milliseconds
                                             3, // large error range, in inches
-                                            500, // large error range timeout, in milliseconds
+                                            150, // large error range timeout, in milliseconds
                                             0// maximum acceleration (slew)
 );
 
@@ -47,10 +50,10 @@ lemlib::ControllerSettings angularController(2.45, // proportional gain (kP)
                                              0, // integral gain (kI)
                                              15, // derivative gain (kD)
                                              3, // anti windup
-                                             1, // small error range, in degrees
-                                             100, // small error range timeout, in milliseconds
+                                             0.5, // small error range, in degrees
+                                             50, // small error range timeout, in milliseconds
                                              3, // large error range, in degrees
-                                             500, // large error range timeout, in milliseconds
+                                             150, // large error range timeout, in milliseconds
                                              0 // maximum acceleration (slew)
 );
 
@@ -86,7 +89,7 @@ pros::ADIDigitalOut middleGoal('B');
 pros::ADIDigitalOut wing('A');
 
 pros::Distance frontSens(1);
-pros::Distance rightSens(4);
+pros::Distance rightSens(21);
 pros::Distance leftSens(7);
 pros::Optical ballSens(10);
 
@@ -639,16 +642,38 @@ lemlib::Pose relocalize(std::string walls, double headingDeg) {
     return p;
 }
 
-void maintainHeadingWVoltage(double maxSpeed, double timeout){
-    double currAngle = imu.get_heading();
-    lemlib::PID angularPID(3, 0, 5);
+void maintainHeadingWVoltage(double maxSpeed, double timeout, bool stop){
+    lemlib::PID angularPID      = lemlib::PID(0.5, 0, 5);
+    const int    loopDelay      = 10;
+
+    const double DEG2RAD        = M_PI / 180.0;
+    const double RAD2DEG        = 180.0 / M_PI;
+
+    uint32_t startTime             = pros::millis();
+
+    double currAngle               = imu.get_heading();
+    
     angularPID.reset();
-    double start = pros::millis();
-    while((pros::millis() - start)>timeout){
+
+    while((pros::millis() - startTime)>timeout){
+        
+        //get curr angle
         double angle = imu.get_heading();
+
+        //calculate error
         double error = angle - currAngle;
+
+        //update PID
         double output = angularPID.update(error);
+
+        //set speed
         chassis.tank(maxSpeed - output, maxSpeed + output);
+
+        pros::delay(loopDelay);
+    }
+
+    if(stop){
+        chassis.tank(0, 0);
     }
 }
 /*impl

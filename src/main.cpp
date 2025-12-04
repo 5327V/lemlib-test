@@ -238,7 +238,7 @@ void oldSkills(){
 
 
 }
-void testSkills(){
+void oldSkills2(){
     wing.set_value(true);
     storeIntake();
     chassis.moveToPoint(0, -3, 1200, {.forwards = false, .maxSpeed = 70});
@@ -432,8 +432,10 @@ void testSkills(){
    pros::delay(600);
    chassis.tank(0,0);
 }
-void autonomous() {
+
+void diamondSkills(){
     //testSkills();
+    wing.set_value(true);
     chassis.moveToPoint(0, -3, 1200, {.forwards = false, .maxSpeed = 70});
     chassis.waitUntilDone();
     storeIntake();
@@ -446,11 +448,12 @@ void autonomous() {
     chassis.tank(0,0);
     chassis.turnToHeading(0, 600, {.maxSpeed = 127});
     chassis.waitUntilDone();
-    moveDistanceWFrontDist(29, 1000, 127);
+    moveDistanceWFrontDist(29, 700, 127);
+    chassis.turnToHeading(0, 600, {.maxSpeed = 127});
     chassis.setPose((-67 + (leftSens.get()/25.4) + 5.5), (67 - (frontSens.get()/25.4) - 7),chassis.getPose().theta);
     pros::delay(10);
-    chassis.turnToHeading(-70, 700, {.maxSpeed = 100});
-    chassis.moveToPoint(-22, 13, 1200, {.forwards = false, .maxSpeed = 70, .minSpeed = 30, .earlyExitRange = 1});
+    chassis.swingToHeading(-76, lemlib::DriveSide::RIGHT, 700, {.maxSpeed = 90});
+    chassis.moveToPoint(-20.5, 18, 1200, {.forwards = false, .maxSpeed = 70});
     chassis.turnToHeading(-45, 600, {.maxSpeed = 100});
     chassis.waitUntilDone();
    matchloader.set_value(true);
@@ -463,32 +466,172 @@ void autonomous() {
    chassis.tank(-6, -6);
    pros::delay(2000);
    storeIntake();
-   chassis.moveToPoint(-48, 38, 2000, {.forwards = true, .maxSpeed = 100});
+   chassis.moveToPoint(-43, 40, 1400, {.forwards = true, .maxSpeed = 80});
    pros::delay(300);
    middleGoal.set_value(false);
-   chassis.turnToHeading(-90, 900, {.maxSpeed = 100});
+   chassis.turnToHeading(-90, 700, {.maxSpeed = 100});
    chassis.waitUntilDone();
    chassis.tank(90, 90);
    pros::delay(700);
    chassis.tank(40, 40);
    pros::delay(1000);
    chassis.tank(0,0);
-   chassis.setPose((-67 + (frontSens.get()/25.4) + 5.5), (67 - (leftSens.get()/25.4) - 7),chassis.getPose().theta);
+   chassis.setPose((-67 + (frontSens.get()/25.4) + 5.5), (67 - (rightSens.get()/25.4) - 7),chassis.getPose().theta);
+   pros::delay(10);
+   chassis.moveToPoint(-35, 33, 1200, {.forwards = false, .maxSpeed = 90, .minSpeed = 30, .earlyExitRange = 1});
+   chassis.turnToHeading(-90, 700, {.maxSpeed = 100});
+   matchloader.set_value(false);
+   //chassis.moveToPoint(-2, 50, 1200, {.forwards = false, .maxSpeed = 90, .minSpeed = 30, .earlyExitRange = 1});
+   chassis.moveToPoint(38, 33, 1600, {.forwards = false, .maxSpeed = 90});
+
+   chassis.turnToHeading(0, 800, {.maxSpeed = 90});
+   chassis.waitUntilDone();
+   while(fabs(frontSens.get())>= 567){
+    chassis.tank(90, 90);
+   }
+   chassis.turnToHeading(90, 900, {.maxSpeed = 70});
+   chassis.waitUntilDone();
+   chassis.tank(-90,-90);
+   pros::delay(800);
+   chassis.tank(-10,-10);
+   scoreLongGoal();
+   pros::delay(2000);
+   chassis.setPose(74, 31, chassis.getPose().theta);
+   chassis.moveToPoint(92.5, 31, 1200, {.forwards = true, .maxSpeed = 70, .minSpeed = 50, .earlyExitRange = 0.3});
+   matchloader.set_value(true);
+   chassis.turnToHeading(90, 600, {.maxSpeed = 70});
+   chassis.waitUntilDone();
+   storeIntake();
+   chassis.tank(90,90);
+   pros::delay(900);
+   chassis.tank(40,40);
+   pros::delay(700);
+
+   chassis.tank(-80, -80);
+   pros::delay(150);
+   chassis.moveToPoint(80, 32, 800, {.forwards = false, .maxSpeed = 70});
+   chassis.turnToHeading(88, 600, {.maxSpeed = 70});
+   chassis.moveToPoint(72, 32, 200, {.forwards = false, .maxSpeed = 70});
+   chassis.waitUntilDone();
+   chassis.tank(-30,-30);
+   scoreLongGoal();
+   pros::delay(2000);
+   chassis.setPose(74, 32, chassis.getPose().theta);
+   matchloader.set_value(false);
+   chassis.tank(90,90);
+   pros::delay(300);
+   chassis.moveToPoint(109, 10, 1200, {.forwards = true, .maxSpeed = 70});
+   chassis.swingToHeading(172, lemlib::DriveSide::RIGHT, 1000, {.maxSpeed = 127});
+   chassis.waitUntilDone();
+   storeIntake();
+   chassis.tank(127,127);
+   pros::delay(200);
+   chassis.tank(105,105);
+   matchloader.set_value(false);
+   pros::delay(2000);
+   chassis.tank(0,0);
+   chassis.turnToHeading(178, 600, {.maxSpeed = 100});
+   moveDistanceWFrontDist(33, 700, 127);
+   chassis.turnToHeading(178, 600, {.maxSpeed = 127});
+   chassis.waitUntilDone();
+   chassis.setPose((67 - (leftSens.get()/25.4) - 5.5), (-67 + (frontSens.get()/25.4) + 7),chassis.getPose().theta);
+   chassis.swingToHeading(-135, lemlib::DriveSide::RIGHT, 700, {.maxSpeed = 90});
+   chassis.moveToPoint(40, -46.5, 900, {.forwards = true, .maxSpeed = 127});
+   chassis.turnToHeading(90, 1000, {.maxSpeed = 90});
+   chassis.waitUntilDone();
+   chassis.tank(-90, -90);
+   pros::delay(800);
+   chassis.tank(-5, -5);
+   scoreLongGoal();
+   pros::delay(2000);
+   chassis.setPose(26,-49,chassis.getPose().theta);
+   pros::delay(10);
+   chassis.moveToPoint(52, -48.1, 1200, {.forwards = true, .maxSpeed = 70, .minSpeed = 50, .earlyExitRange = 0.3});
+   matchloader.set_value(true);
+   chassis.turnToHeading(90, 600, {.maxSpeed = 70});
+   chassis.waitUntilDone();
+   storeIntake();
+   chassis.tank(90,90);
+   pros::delay(900);
+   chassis.tank(40,40);
+   pros::delay(500);
+   chassis.moveToPoint(50, -48.1, 1200, {.forwards = false, .maxSpeed = 90, .minSpeed = 50, .earlyExitRange = 0.3});
+   chassis.waitUntilDone();
+   matchloader.set_value(false);
+   chassis.turnToHeading(133, 800, {.maxSpeed = 70});
+   chassis.moveToPoint(13, -14, 3000, {.forwards = false, .maxSpeed = 90});
+   chassis.waitUntilDone();
+   chassis.tank(-80, -80);
+   pros::delay(200);
+   outtake();
+   pros::delay(200);
+   stopIntake();
+   chassis.tank(-1,-1);
+   scoreMiddleGoal();
+   pros::delay(1400);
+   chassis.tank(100, 100);
+   pros::delay(400);
+   chassis.turnToHeading(-90, 400, {.maxSpeed = 70});
+   chassis.moveToPoint(-30,-38, 3000, {.forwards = true, .maxSpeed = 90, .minSpeed = 50, .earlyExitRange = 1});
+   chassis.turnToHeading(180, 1000, {.maxSpeed = 70});
+   chassis.waitUntilDone();
+   middleGoal.set_value(false);
+   while(fabs(frontSens.get())>= 568){
+    chassis.tank(90, 90);
+   }
+   chassis.tank(0,0);
+   chassis.turnToHeading(-91, 1000, {.maxSpeed = 70});
+   chassis.waitUntilDone();
+   chassis.tank(-90,-90);
+   pros::delay(800);
+   chassis.tank(-10,-10);
+   scoreLongGoal();
+   pros::delay(2000);
+   chassis.setPose(20, -72, chassis.getPose().theta);
+   pros::delay(100);
+   matchloader.set_value(true);
+   chassis.moveToPoint(0, -72.7, 1200, {.forwards = true, .maxSpeed = 70, .minSpeed = 50, .earlyExitRange = 0.2});
+   chassis.turnToHeading(-90, 600, {.maxSpeed = 70});
+   chassis.waitUntilDone();
+   storeIntake();
+   chassis.tank(90,90);
+   pros::delay(1000);
+   chassis.tank(40,40);
+   pros::delay(700);
+   chassis.moveToPoint(10, -72, 1200, {.forwards = false, .maxSpeed = 70});
+   chassis.turnToHeading(-90, 600, {.maxSpeed = 70});
+   chassis.moveToPoint(20, -72, 800, {.forwards = false, .maxSpeed = 70});
+   chassis.waitUntilDone();
+   scoreLongGoal();
+   pros::delay(2000);
+   chassis.setPose(-29, -46, chassis.getPose().theta);
+   matchloader.set_value(false);
+   chassis.tank(127, 127);
+   pros::delay(200);
+   chassis.moveToPoint(-70,-17, 1200, {.forwards = true, .maxSpeed = 70});
+   chassis.swingToHeading(-5, lemlib::DriveSide::RIGHT, 700, {.maxSpeed = 100});
+   chassis.waitUntilDone();
+   chassis.tank(127, 127);
+   pros::delay(600);
+   chassis.tank(0,0);
+}
+void autonomous() {
+    diamondSkills();  
 }
 
 /**
  * Runs in driver control
  */
+bool calibrate = false;
 void opcontrol() {
-    // controller
-    // loop to continuously update motors
-    while (true) {
-        // get joystick positions
-        int leftY = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
-        int rightX = controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);
-        // move the chassis with curvature drive
-        chassis.arcade(leftY, rightX);
-        // delay to save resources
-        pros::delay(10);
+    if(calibrate){
+        pros::delay(500);
+        diamondSkills();
+    } else{
+        while (true) {
+            chassis.arcade(controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y),
+                           controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_X));
+            pros::delay(20);
+        }
     }
 }
