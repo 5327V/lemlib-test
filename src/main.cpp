@@ -452,8 +452,11 @@ void diamondSkills(){
     chassis.turnToHeading(0, 600, {.maxSpeed = 127});
     chassis.setPose((-67 + (leftSens.get()/25.4) + 5.5), (67 - (frontSens.get()/25.4) - 7),chassis.getPose().theta);
     pros::delay(10);
-    chassis.swingToHeading(-76, lemlib::DriveSide::RIGHT, 700, {.maxSpeed = 90});
-    chassis.moveToPoint(-20.5, 18, 1200, {.forwards = false, .maxSpeed = 70});
+    //chassis.swingToHeading(-76, lemlib::DriveSide::RIGHT, 700, {.maxSpeed = 90});
+    chassis.swingToHeading(-90, lemlib::DriveSide::RIGHT, 1000, {.maxSpeed = 90});
+    chassis.waitUntilDone();
+    moveDistanceWFrontDistBack(50, 1500, 127);
+    //chassis.moveToPoint(-20.5, 18, 1200, {.forwards = false, .maxSpeed = 70});
     chassis.turnToHeading(-45, 600, {.maxSpeed = 100});
     chassis.waitUntilDone();
    matchloader.set_value(true);

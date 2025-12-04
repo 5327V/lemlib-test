@@ -52,6 +52,7 @@ extern pros::Optical ballSens;
 
 extern void moveDistance(double inches, int timeout, double maxSpeed = 127);
 extern void moveDistanceWFrontDist(double inches, int timeout, double maxSpeed = 127);
+extern void moveDistanceWFrontDistBack(double inches, int timeout, double maxSpeed = 127);
 extern void moveDistanceWFrontDistAngular(double inches, int timeout, double maxSpeed = 127);
 extern void _ramseteCore(double targetX, double targetY,
                          bool useFinalHeading, double targetThetaDeg,

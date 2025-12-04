@@ -219,6 +219,63 @@ void moveDistanceWFrontDist(double inches, int timeout, double maxSpeed) {
 
     chassis.tank(0, 0, true);
 }
+
+void moveDistanceWFrontDistBack(double inches, int timeout, double maxSpeed) {
+    const double kP = MOVE_DISTANCE_P;
+    const double kD = LATERAL_KD;
+
+    const double tolerance         = LATERAL_SMALL_ERROR;
+    const int    smallErrorTimeout = LATERAL_SMALL_ERROR_TIMEOUT;
+    const int    loopDelay         = 10;
+
+    double start = frontSens.get()/25.4;
+
+    double error     = inches;
+    double prevError = error;
+    double output    = 0.0;
+    uint32_t startTime             = pros::millis();
+    uint32_t withinSmallErrorStart = 0;
+    double derivative = 0.0;
+    while (pros::millis() - startTime < static_cast<uint32_t>(timeout)) {
+        double cur = frontSens.get()/25.4;
+        error = (cur - inches);
+        // small-error timeout
+        if (std::fabs(error) < tolerance) {
+            if (withinSmallErrorStart == 0) withinSmallErrorStart = pros::millis();
+            if (pros::millis() - withinSmallErrorStart >= (uint32_t)smallErrorTimeout) break;
+        } else {
+            withinSmallErrorStart = 0;
+        }
+
+        // PD controller with discrete derivative
+        double derivative = 0.0;
+        if (std::fabs(error) > tolerance * 2.0) {
+            double errorDelta = error - prevError;
+            derivative = errorDelta;   // dt baked into kD
+        }
+        prevError = error;
+
+        output = kP * error + kD * derivative;
+
+        // clamp
+        if (output > maxSpeed) output = maxSpeed;
+        if (output < -maxSpeed) output = -maxSpeed;
+
+        const double minMove = 5.0;
+        if (std::fabs(output) < minMove && std::fabs(error) > tolerance) {
+            output = (output >= 0 ? 1 : -1) * minMove;
+        }
+
+        chassis.tank((int)-output, (int)-output, true);
+        if(fabs(error) <= 0.2){
+            break;
+        }
+        pros::delay(loopDelay);
+    }
+
+    chassis.tank(0, 0, true);
+}
+
 void moveDistanceWFrontDistAngular(double inches, int timeout, double maxSpeed) {
     const double kP = MOVE_DISTANCE_P;
     const double kD = LATERAL_KD;
