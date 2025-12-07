@@ -56,8 +56,10 @@ void skillsLongGoalScore(){
 }
 
 void scoreMiddleGoalScore(){
-    while(!(ballSens.get_hue() > 1 && ballSens.get_hue() < 10)){
-        manualIntake(90, 80);
+    outtake();
+    pros::delay(150);
+    while(!(ballSens.get_hue() > 180 && ballSens.get_hue() < 210)){
+        scoreMiddleGoal();
     }
     stopIntake();
 }

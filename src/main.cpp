@@ -571,14 +571,14 @@ void diamondSkills(){
    chassis.moveToPoint(13, -14, 3000, {.forwards = false, .maxSpeed = 90});
    chassis.waitUntilDone();
    middleGoal.set_value(true);
-   chassis.tank(-80, -80);
-   pros::delay(200);
+   chassis.tank(-70, -70);
+   pros::delay(230);
    outtake();
    pros::delay(200);
    stopIntake();
    chassis.tank(-1,-1);
    manualIntake(99,110);
-   pros::delay(1200);
+   pros::delay(800);
    /*
    scoreMiddleGoalScore();
    */
