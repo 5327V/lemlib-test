@@ -19,12 +19,12 @@
 
 
 // motor groups
-pros::MotorGroup leftMotors({-11, -13, -14},
+pros::MotorGroup leftMotors({-13, -12, -11},
                             pros::MotorGearset::blue); // left motor group - ports 3 (reversed), 4, 5 (reversed)
-pros::MotorGroup rightMotors({18, 19, 20}, pros::MotorGearset::blue); // right motor group - ports 6, 7, 9 (reversed)
+pros::MotorGroup rightMotors({17, 18, 19}, pros::MotorGearset::blue); // right motor group - ports 6, 7, 9 (reversed)
 
 // Inertial Sensor
-pros::Imu imu(3);
+pros::Imu imu(2);
 lemlib::Drivetrain drivetrain(&leftMotors, // left motor group
                               &rightMotors, // right motor group
                               11, // 10 inch track width
@@ -81,17 +81,17 @@ lemlib::ExpoDriveCurve steerCurve(3, // joystick deadband out of 127
 lemlib::Chassis chassis(drivetrain, linearController, angularController, sensors, &throttleCurve, &steerCurve);
 
 //subystems
-pros::Motor intake(10);
-pros::Motor hood(-2);
+pros::Motor intake(16);
+pros::Motor hood(-1);
 
 pros::ADIDigitalOut matchloader('C');
 pros::ADIDigitalOut middleGoal('B');
 pros::ADIDigitalOut wing('A');
 
-pros::Distance frontSens(1);
-pros::Distance rightSens(21);
-pros::Distance leftSens(7);
-pros::Optical ballSens(10);
+pros::Distance frontSens(15);
+pros::Distance rightSens(4);
+pros::Distance leftSens(3);
+pros::Optical ballSens(14);
 
 pros::Controller controller(pros::E_CONTROLLER_MASTER);
 
