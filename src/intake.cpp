@@ -31,9 +31,9 @@ void scoreLongGoal(){
 void scoreMiddleGoal(){
     middleGoal.set_value(true);
     intakeSpeed = 127;
-    hoodSpeed = 84;
+    hoodSpeed = -70;
     intake.move(127);
-    hood.move(84);
+    hood.move(-70);
 }
 
 void outtake(){
@@ -44,9 +44,9 @@ void outtake(){
 }
 void storeIntake(){
     intakeSpeed = 127;
-    hoodSpeed = -50;
+    hoodSpeed = 0;
     intake.move(127);
-    hood.move(-50);
+    hood.move(0);
 }
 
 void skillsLongGoalScore(){
