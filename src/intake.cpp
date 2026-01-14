@@ -6,7 +6,7 @@
 
 double intakeSpeed = 0;
 double hoodSpeed = 0;
-
+pros::Task* intakeTask;
 void manualIntake(double intake_speed, double hood_speed){
     intakeSpeed = intake_speed;
     hoodSpeed = hood_speed;
@@ -31,9 +31,9 @@ void scoreLongGoal(){
 void scoreMiddleGoal(){
     middleGoal.set_value(true);
     intakeSpeed = 127;
-    hoodSpeed = 84;
+    hoodSpeed = -84;
     intake.move(127);
-    hood.move(84);
+    hood.move(-84);
 }
 
 void outtake(){
@@ -42,12 +42,14 @@ void outtake(){
     intake.move(-127);
     hood.move(-127);
 }
+
 void storeIntake(){
     intakeSpeed = 127;
-    hoodSpeed = -50;
+    hoodSpeed = -10;
     intake.move(127);
-    hood.move(-50);
+    hood.move(-10);
 }
+
 
 void skillsLongGoalScore(){
     outtake();
