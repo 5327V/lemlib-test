@@ -505,21 +505,20 @@ void diamondSkills(){
    chassis.tank(0,0);
    chassis.setPose((-67 + (frontSens.get()/25.4) + 5.5), (67 - (rightSens.get()/25.4) - 7),chassis.getPose().theta);
    pros::delay(10);
-   chassis.moveToPoint(-35, 33, 1200, {.forwards = false, .maxSpeed = 90, .minSpeed = 30, .earlyExitRange = 1});
-   chassis.turnToHeading(-90, 700, {.maxSpeed = 100});
+   chassis.moveToPoint(-35, 50, 1200, {.forwards = false, .maxSpeed = 90, .minSpeed = 30, .earlyExitRange = 1});
    matchloader.set_value(false);
    //chassis.moveToPoint(-2, 50, 1200, {.forwards = false, .maxSpeed = 90, .minSpeed = 30, .earlyExitRange = 1});
-   chassis.moveToPoint(38, 32.7, 1600, {.forwards = false, .maxSpeed = 90});
+   chassis.moveToPoint(35, 50, 1600, {.forwards = false, .maxSpeed = 90});
 
-   chassis.turnToHeading(0, 800, {.maxSpeed = 90});
+   chassis.swingToHeading(0, lemlib::DriveSide::LEFT, 1000, {.maxSpeed = 100});
    chassis.waitUntilDone();
-   while(fabs(frontSens.get())>= 567){
-    chassis.tank(90, 90);
+   while(fabs(frontSens.get())<= 248){
+    chassis.tank(-60, -60);
    }
-   chassis.turnToHeading(90, 900, {.maxSpeed = 70});
+   chassis.turnToHeading(88, 900, {.maxSpeed = 70});
    chassis.waitUntilDone();
    chassis.tank(-110,-110);
-   pros::delay(800);
+   pros::delay(1050);
    chassis.tank(-10,-10);
    skillsLongGoalScore();
    pros::delay(1800);
@@ -560,7 +559,7 @@ void diamondSkills(){
    matchloader.set_value(false);
    pros::delay(200);
    chassis.tank(80,80);
-   pros::delay(1600);
+   pros::delay(1700);
    //matchloader.set_value(true);
    matchloader.set_value(false);
    moveDistanceWFrontDist(28, 1500, 80);
@@ -594,7 +593,7 @@ void diamondSkills(){
     chassis.waitUntilDone();
    chassis.setPose((67 - (leftSens.get()/25.4) - 5.5), (-67 + (frontSens.get()/25.4) + 7),chassis.getPose().theta);
    chassis.swingToHeading(-135, lemlib::DriveSide::RIGHT, 700, {.maxSpeed = 90});
-   chassis.moveToPoint(40, -42.6, 900, {.forwards = true, .maxSpeed = 127});
+   chassis.moveToPoint(40, -44.5, 900, {.forwards = true, .maxSpeed = 100});
    chassis.turnToHeading(93, 1000, {.maxSpeed = 90});
    chassis.waitUntilDone();
    chassis.tank(-120, -120);
@@ -604,7 +603,7 @@ void diamondSkills(){
    pros::delay(1900);
    chassis.setPose(26,-49,chassis.getPose().theta);
    pros::delay(10);
-   chassis.moveToPoint(52, -48.5, 1200, {.forwards = true, .maxSpeed = 70, .minSpeed = 50, .earlyExitRange = 0.3});
+   chassis.moveToPoint(52, -49.5, 1200, {.forwards = true, .maxSpeed = 70, .minSpeed = 50, .earlyExitRange = 0.3});
    matchloader.set_value(true);
    chassis.turnToHeading(90, 600, {.maxSpeed = 70});
    chassis.waitUntilDone();
@@ -613,7 +612,7 @@ void diamondSkills(){
    pros::delay(900);
    chassis.tank(80,80);
    pros::delay(500);
-   chassis.moveToPoint(50, -48.5, 1200, {.forwards = false, .maxSpeed = 90, .minSpeed = 50, .earlyExitRange = 0.3});
+   chassis.moveToPoint(51, -49.5, 1200, {.forwards = false, .maxSpeed = 90, .minSpeed = 50, .earlyExitRange = 0.3});
    chassis.waitUntilDone();
    matchloader.set_value(false);
    chassis.turnToHeading(133, 800, {.maxSpeed = 70});
@@ -626,10 +625,10 @@ void diamondSkills(){
    pros::delay(200);
    stopIntake();
    chassis.tank(-1,-1);
-   manualIntake(127, -30);
-   pros::delay(800);
-   manualIntake(115, -20);
-   pros::delay(200);
+   manualIntake(127, -40);
+   pros::delay(400);
+   manualIntake(80, -40);
+   pros::delay(600);
    middleGoal.set_value(false);
    stopIntake();
    /*
@@ -642,8 +641,8 @@ void diamondSkills(){
    chassis.moveToPoint(-35,-38, 3000, {.forwards = true, .maxSpeed = 90, .minSpeed = 50, .earlyExitRange = 1});
    chassis.turnToHeading(180, 1000, {.maxSpeed = 70});
    chassis.waitUntilDone();
-   while(fabs(frontSens.get())>= 599){
-    chassis.tank(90, 90);
+   while(fabs(frontSens.get())>= 580){
+    chassis.tank(70, 70);
    }
    chassis.tank(0,0);
    chassis.turnToHeading(-93, 700, {.maxSpeed = 90});
@@ -663,7 +662,7 @@ void diamondSkills(){
    chassis.tank(90,90);
    pros::delay(900);
    chassis.tank(80,80);
-   pros::delay(700);
+   pros::delay(900);
    chassis.moveToPoint(10, -72, 1200, {.forwards = false, .maxSpeed = 70});
    chassis.turnToHeading(-90, 600, {.maxSpeed = 70});
    chassis.moveToPoint(20, -72, 800, {.forwards = false, .maxSpeed = 70});
@@ -716,7 +715,7 @@ void diamondSkills2(){
     pros::delay(1200);
     moveDistance(-3, 600, 127);
     chassis.tank(80,80);
-    pros::delay(1000);
+    pros::delay(1100);
     chassis.tank(0,0);
     stopIntake();
     wing.set_value(true);
@@ -753,7 +752,7 @@ void diamondSkills2(){
     pros::delay(1400);
     moveDistance(-3, 600, 127);
     chassis.tank(80,80);
-    pros::delay(1000);
+    pros::delay(1100);
     chassis.tank(0,0);
    stopIntake();
    chassis.tank(-80, -80);
@@ -888,7 +887,7 @@ void diamondSkills2(){
     pros::delay(1600);
     moveDistance(-3, 600, 127);
     chassis.tank(80,80);
-    pros::delay(1000);
+    pros::delay(1100);
     chassis.tank(0,0);
    chassis.moveToPoint(10, -72, 1200, {.forwards = false, .maxSpeed = 70});
    chassis.turnToHeading(-90, 600, {.maxSpeed = 70});
@@ -907,7 +906,7 @@ void diamondSkills2(){
    chassis.swingToHeading(-10, lemlib::DriveSide::RIGHT, 700, {.maxSpeed = 100});
    chassis.waitUntilDone();
    chassis.tank(110, 110);
-   pros::delay(1050);
+   pros::delay(950);
    chassis.tank(0,0);
    /*
     matchloader.set_value(true);
