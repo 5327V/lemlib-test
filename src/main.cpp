@@ -453,7 +453,7 @@ void diamondSkills(){
     storeIntake();
    chassis.tank(110,110);
    pros::delay(200);
-   matchloader.set_value(true);
+   matchloader.set_value(false);
    pros::delay(150);
    matchloader.set_value(false);
    pros::delay(200);
@@ -501,7 +501,7 @@ void diamondSkills(){
    chassis.tank(90, 90);
    pros::delay(700);
    chassis.tank(80, 80);
-   pros::delay(900);
+   pros::delay(1000);
    chassis.tank(0,0);
    chassis.setPose((-67 + (frontSens.get()/25.4) + 5.5), (67 - (rightSens.get()/25.4) - 7),chassis.getPose().theta);
    pros::delay(10);
@@ -513,7 +513,7 @@ void diamondSkills(){
 
    chassis.turnToHeading(0, 800, {.maxSpeed = 90});
    chassis.waitUntilDone();
-   while(fabs(frontSens.get())>= 567){
+   while(fabs(frontSens.get())>= 540){
     chassis.tank(90, 90);
    }
    chassis.turnToHeading(90, 900, {.maxSpeed = 70});
@@ -532,7 +532,7 @@ void diamondSkills(){
    chassis.tank(90,90);
    pros::delay(950);
    chassis.tank(80,80);
-   pros::delay(750);
+   pros::delay(850);
 
    chassis.tank(-80, -80);
    pros::delay(150);
@@ -594,7 +594,7 @@ void diamondSkills(){
     chassis.waitUntilDone();
    chassis.setPose((67 - (leftSens.get()/25.4) - 5.5), (-67 + (frontSens.get()/25.4) + 7),chassis.getPose().theta);
    chassis.swingToHeading(-135, lemlib::DriveSide::RIGHT, 700, {.maxSpeed = 90});
-   chassis.moveToPoint(40, -42.6, 900, {.forwards = true, .maxSpeed = 127});
+   chassis.moveToPoint(40, -44.6, 900, {.forwards = true, .maxSpeed = 127});
    chassis.turnToHeading(93, 1000, {.maxSpeed = 90});
    chassis.waitUntilDone();
    chassis.tank(-120, -120);
@@ -626,10 +626,8 @@ void diamondSkills(){
    pros::delay(200);
    stopIntake();
    chassis.tank(-1,-1);
-   manualIntake(127, -30);
-   pros::delay(800);
-   manualIntake(115, -20);
-   pros::delay(200);
+   manualIntake(110, -30);
+   pros::delay(1000);
    middleGoal.set_value(false);
    stopIntake();
    /*
@@ -678,7 +676,7 @@ void diamondSkills(){
    chassis.swingToHeading(-10, lemlib::DriveSide::RIGHT, 700, {.maxSpeed = 100});
    chassis.waitUntilDone();
    chassis.tank(110, 110);
-   pros::delay(800);
+   pros::delay(700);
    chassis.tank(0,0);
 }
 pros::Imu inertial(2);
